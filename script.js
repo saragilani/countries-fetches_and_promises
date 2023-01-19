@@ -2,7 +2,8 @@ const searchForm = document.querySelector("#countries-input")
 
 // Function to return country info after taking in its name
 const getCountryByName = async (countryName) => {
-  countryName.preventDefault();
+    countryName.preventDefault();
+    document.querySelector('#countryList').textContent = "";
 
     const fetchResponse = await fetch('https://restcountries.com/v3.1/name/' + countryName.target.text.value);
     console.log(fetchResponse);
@@ -12,10 +13,10 @@ const getCountryByName = async (countryName) => {
     
     //Creating list items
     const listItem1 = document.createElement("li");
-    listItem1.textContent = "Name: " + JSON.stringify(countriesJSON[0].name, null, "");
+    listItem1.textContent = "Name: " + JSON.stringify(countriesJSON[0].name.common, null, "");
     
     const listItem2 = document.createElement("li");
-    listItem2.textContent = "Capital: " + JSON.stringify(countriesJSON[0].capital, null, "");
+    listItem2.textContent = "Capital: " + JSON.stringify(countriesJSON[0].capital[0], null, "");
     
     const listItem3 = document.createElement("li");
     listItem3.textContent = "Flag: " + JSON.stringify(countriesJSON[0].flag, null, "");
@@ -30,7 +31,7 @@ const getCountryByName = async (countryName) => {
     listItem6.textContent = "Population: " + JSON.stringify(countriesJSON[0].population, null, "");
     
     const listItem7 = document.createElement("li");
-    listItem7.textContent = "Time Zone: " + JSON.stringify(countriesJSON[0].timezones, null, "");
+    listItem7.textContent = "Time Zone: " + JSON.stringify(countriesJSON[0].timezones[0], null, "");
 
     //Appending country info to list.
     const list = document.querySelector("ul");
@@ -41,8 +42,6 @@ const getCountryByName = async (countryName) => {
     list.appendChild(listItem5);
     list.appendChild(listItem6);
     list.appendChild(listItem7);
-
-    
 
 }
 
